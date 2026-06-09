@@ -1,0 +1,137 @@
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 20px 24px;
+  transition: background var(--transition), border-color var(--transition), backdrop-filter var(--transition);
+  border-bottom: 1px solid transparent;
+}
+
+.nav.scrolled {
+  background: rgba(15, 15, 15, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom-color: var(--border);
+  padding: 14px 24px;
+}
+
+.inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+  transition: color var(--transition);
+}
+
+.logo:hover {
+  color: var(--accent-light);
+}
+
+.links {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.link {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  padding: 6px 10px;
+  border-radius: var(--radius-sm);
+  transition: color var(--transition), background var(--transition);
+}
+
+.link:hover {
+  color: var(--text-primary);
+  background: var(--bg-hover);
+}
+
+.resumeBtn {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--accent-light);
+  border: 1px solid var(--accent);
+  padding: 6px 14px;
+  border-radius: var(--radius-sm);
+  transition: background var(--transition), color var(--transition);
+  margin-left: 8px;
+}
+
+.resumeBtn:hover {
+  background: var(--accent-dim);
+}
+
+.menuBtn {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.bar {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--text-primary);
+  border-radius: 2px;
+  transition: transform var(--transition), opacity var(--transition);
+}
+
+.mobileMenu {
+  display: flex;
+  flex-direction: column;
+  padding: 12px 24px 20px;
+  border-top: 1px solid var(--border);
+  background: rgba(15, 15, 15, 0.95);
+}
+
+.mobileLink {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+  transition: color var(--transition);
+}
+
+.mobileLink:hover {
+  color: var(--text-primary);
+}
+
+.mobileResumeBtn {
+  margin-top: 16px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--accent-light);
+  border: 1px solid var(--accent);
+  padding: 10px 16px;
+  border-radius: var(--radius-sm);
+  text-align: center;
+  transition: background var(--transition);
+}
+
+.mobileResumeBtn:hover {
+  background: var(--accent-dim);
+}
+
+@media (max-width: 640px) {
+  .links {
+    display: none;
+  }
+
+  .menuBtn {
+    display: flex;
+  }
+}
