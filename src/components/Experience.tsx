@@ -9,18 +9,18 @@ export default function Experience() {
   const list = portfolioData.experiences;
 
   return (
-    <Box id="experience" component="section" sx={{ py: { xs: 9, md: 12 } }}>
+    <Box id="experience" component="section" sx={{ py: { xs: 8, md: 10 } }}>
       <Container maxWidth="md">
         <FadeIn>
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, mb: 1 }}>
-            <Box sx={{ width: 4, height: 20, bgcolor: 'primary.main' }} />
+            <Box sx={{ width: 18, height: 1, bgcolor: 'text.primary' }} />
             <Typography
               sx={{
-                color: 'primary.main',
-                fontWeight: 700,
-                letterSpacing: '0.2em',
+                color: 'text.secondary',
+                fontWeight: 600,
+                letterSpacing: '0.14em',
                 textTransform: 'uppercase',
-                fontSize: '0.7rem',
+                fontSize: '0.72rem',
                 fontFamily: 'var(--font-geist-mono), monospace',
               }}
             >
@@ -29,11 +29,11 @@ export default function Experience() {
           </Box>
           <Typography
             variant="h2"
-            sx={{ mt: 1, mb: 2, fontSize: { xs: '1.6rem', md: '2.2rem' }, textTransform: 'uppercase' }}
+            sx={{ mt: 1, mb: 2, fontSize: { xs: '1.6rem', md: '2.2rem' } }}
           >
             경력 사항
           </Typography>
-          <Typography variant="body1" color="text.secondary" sx={{ mb: 6 }}>
+          <Typography variant="body1" color="text.secondary" sx={{ mb: 5 }}>
             다양한 업무와 프로젝트를 통해 경험과 노하우를 쌓고 있습니다.
           </Typography>
         </FadeIn>
@@ -61,7 +61,7 @@ export default function Experience() {
                   variant="caption"
                   sx={{
                     fontFamily: 'var(--font-geist-mono), monospace',
-                    color: 'primary.main',
+                    color: 'text.secondary',
                     textAlign: 'right',
                     lineHeight: 1.5,
                     fontSize: '0.7rem',
@@ -75,16 +75,15 @@ export default function Experience() {
                 </Typography>
               </Box>
 
-              {/* Timeline — diamond dot + line */}
+              {/* Timeline */}
               <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', pt: '4px' }}>
                 <Box
                   sx={{
-                    width: 12,
-                    height: 12,
-                    bgcolor: 'primary.main',
-                    transform: 'rotate(45deg)',
+                    width: 8,
+                    height: 8,
+                    bgcolor: 'text.primary',
+                    borderRadius: '50%',
                     flexShrink: 0,
-                    boxShadow: '0 0 10px rgba(249,158,26,0.6)',
                   }}
                 />
                 {i < list.length - 1 && (
@@ -92,7 +91,7 @@ export default function Experience() {
                     sx={{
                       width: '1px',
                       flex: 1,
-                      background: 'linear-gradient(to bottom, rgba(249,158,26,0.4), rgba(249,158,26,0.08))',
+                      background: 'divider',
                       mt: 1,
                       minHeight: 40,
                     }}
@@ -101,14 +100,14 @@ export default function Experience() {
               </Box>
 
               {/* Content */}
-              <Box sx={{ pb: 6 }}>
+              <Box sx={{ pb: 5 }}>
                 {/* Mobile period */}
                 <Typography
                   variant="caption"
                   sx={{
                     display: { xs: 'block', sm: 'none' },
                     fontFamily: 'var(--font-geist-mono), monospace',
-                    color: 'primary.main',
+                    color: 'text.secondary',
                     mb: 0.5,
                     fontSize: '0.7rem',
                   }}
@@ -117,7 +116,7 @@ export default function Experience() {
                 </Typography>
 
                 <Box sx={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: 1, mb: 0.5 }}>
-                  <Typography variant="h6" sx={{ fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.03em' }}>
+                  <Typography variant="h6" sx={{ fontWeight: 700, letterSpacing: '0.01em' }}>
                     {exp.company}
                   </Typography>
                   <Chip
@@ -126,19 +125,19 @@ export default function Experience() {
                     sx={{
                       height: 20,
                       fontSize: '0.65rem',
-                      borderRadius: 0,
-                      fontWeight: 700,
-                      letterSpacing: '0.06em',
-                      bgcolor: 'rgba(249,158,26,0.12)',
-                      color: 'primary.main',
-                      border: '1px solid rgba(249,158,26,0.4)',
+                      borderRadius: 1,
+                      fontWeight: 600,
+                      bgcolor: 'action.hover',
+                      color: 'text.secondary',
+                      border: '1px solid',
+                      borderColor: 'divider',
                     }}
                   />
                 </Box>
 
                 <Typography
                   variant="body2"
-                  sx={{ mb: 2, fontWeight: 600, color: 'secondary.main', letterSpacing: '0.04em', fontSize: '0.8rem' }}
+                  sx={{ mb: 2, fontWeight: 600, color: 'text.primary', letterSpacing: '0.01em', fontSize: '0.85rem' }}
                 >
                   {exp.role}
                 </Typography>
@@ -156,10 +155,9 @@ export default function Experience() {
                     >
                       <Box
                         sx={{
-                          width: 5,
-                          height: 5,
-                          bgcolor: 'primary.main',
-                          transform: 'rotate(45deg)',
+                          width: 4,
+                          height: 4,
+                          bgcolor: 'text.secondary',
                           mt: '7px',
                           flexShrink: 0,
                         }}
@@ -190,4 +188,3 @@ export default function Experience() {
     </Box>
   );
 }
-

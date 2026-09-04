@@ -13,17 +13,7 @@ export default function Footer() {
       sx={{
         borderTop: '1px solid',
         borderColor: 'divider',
-        py: 4,
-        position: 'relative',
-        '&::before': {
-          content: '""',
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          right: 0,
-          height: '2px',
-          background: 'linear-gradient(90deg, #F99E1A 0%, transparent 40%)',
-        },
+        py: 3.5,
       }}
     >
       <Container maxWidth="md">
@@ -37,10 +27,10 @@ export default function Footer() {
           }}
         >
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-            <Box sx={{ width: 3, height: 3, bgcolor: 'primary.main', transform: 'rotate(45deg)' }} />
+            <Box sx={{ width: 14, height: 1, bgcolor: 'text.primary' }} />
             <Typography
               variant="subtitle2"
-              sx={{ fontWeight: 900, color: 'primary.main', letterSpacing: '0.08em', textTransform: 'uppercase' }}
+              sx={{ fontWeight: 700, color: 'text.primary', letterSpacing: '0.02em' }}
             >
               {personal.name}
             </Typography>
@@ -56,4 +46,3 @@ export default function Footer() {
     </Box>
   );
 }
-

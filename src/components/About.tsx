@@ -8,19 +8,18 @@ import FadeIn from '@/components/FadeIn';
 
 export default function About() {
   return (
-    <Box id="about" component="section" sx={{ py: { xs: 9, md: 12 } }}>
+    <Box id="about" component="section" sx={{ py: { xs: 8, md: 10 } }}>
       <Container maxWidth="md">
         <FadeIn>
-          {/* OW section header */}
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, mb: 1 }}>
-            <Box sx={{ width: 4, height: 20, bgcolor: 'primary.main' }} />
+            <Box sx={{ width: 18, height: 1, bgcolor: 'text.primary' }} />
             <Typography
               sx={{
-                color: 'primary.main',
-                fontWeight: 700,
-                letterSpacing: '0.2em',
+                color: 'text.secondary',
+                fontWeight: 600,
+                letterSpacing: '0.14em',
                 textTransform: 'uppercase',
-                fontSize: '0.7rem',
+                fontSize: '0.72rem',
                 fontFamily: 'var(--font-geist-mono), monospace',
               }}
             >
@@ -29,34 +28,22 @@ export default function About() {
           </Box>
           <Typography
             variant="h2"
-            sx={{ mt: 1, mb: 2, fontSize: { xs: '1.6rem', md: '2.2rem' }, textTransform: 'uppercase' }}
+            sx={{ mt: 1, mb: 2, fontSize: { xs: '1.6rem', md: '2.2rem' } }}
           >
             핵심 역량
           </Typography>
-          <Typography variant="body1" color="text.secondary" sx={{ mb: 6, maxWidth: 540 }}>
+          <Typography variant="body1" color="text.secondary" sx={{ mb: 5, maxWidth: 520 }}>
             유연하게 소통하고 견고하게 개발합니다.
           </Typography>
         </FadeIn>
 
-        <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: 'repeat(3, 1fr)' }, gap: 2 }}>
+        <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: 'repeat(3, 1fr)' }, gap: 1.5 }}>
           {portfolioData.strengths.map((item, i) => (
             <FadeIn key={item.title} delay={i * 120}>
               <Card
                 sx={{
                   height: '100%',
-                  position: 'relative',
-                  overflow: 'hidden',
-                  '&::before': {
-                    content: '""',
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    height: '2px',
-                    background: i % 2 === 0
-                      ? 'linear-gradient(90deg, #F99E1A, transparent)'
-                      : 'linear-gradient(90deg, #00B4FF, transparent)',
-                  },
+                  borderColor: 'divider',
                 }}
               >
                 <CardContent sx={{ p: 3.5 }}>
@@ -71,14 +58,13 @@ export default function About() {
                       mb: 2.5,
                       border: '1px solid',
                       borderColor: 'divider',
-                      clipPath: 'polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)',
                     }}
                   >
                     {item.icon}
                   </Box>
                   <Typography
                     variant="h6"
-                    sx={{ fontWeight: 800, mb: 1.5, letterSpacing: '0.02em', textTransform: 'uppercase', fontSize: '0.9rem' }}
+                    sx={{ fontWeight: 700, mb: 1.5, letterSpacing: '0.01em', fontSize: '0.95rem' }}
                   >
                     {item.title}
                   </Typography>
@@ -94,4 +80,3 @@ export default function About() {
     </Box>
   );
 }
-

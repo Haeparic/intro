@@ -1,15 +1,17 @@
 'use client';
 
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
-import Box from '@mui/material/Box';
 import { lightTheme, darkTheme } from '@/theme/theme';
 
 interface ThemeToggleContextType {
   isDark: boolean;
   toggleTheme: () => void;
 }
+
+type ThemePreference = 'light' | 'dark' | 'system';
+const THEME_STORAGE_KEY = 'portfolio-theme-preference';
 
 export const ThemeToggleContext = createContext<ThemeToggleContextType>({
   isDark: false,
@@ -21,27 +23,55 @@ export function useThemeToggle() {
 }
 
 export default function Providers({ children }: { children: React.ReactNode }) {
-  const [isDark, setIsDark] = useState(false);
+  const [themePreference, setThemePreference] = useState<ThemePreference>(() => {
+    if (typeof window === 'undefined') {
+      return 'system';
+    }
+    const saved = window.localStorage.getItem(THEME_STORAGE_KEY);
+    if (saved === 'light' || saved === 'dark' || saved === 'system') {
+      return saved;
+    }
+    return 'system';
+  });
+  const [systemPrefersDark, setSystemPrefersDark] = useState(() => (
+    typeof window !== 'undefined' ? window.matchMedia('(prefers-color-scheme: dark)').matches : false
+  ));
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+
+    const handleChange = (event: MediaQueryListEvent) => {
+      setSystemPrefersDark(event.matches);
+    };
+
+    mediaQuery.addEventListener('change', handleChange);
+    return () => {
+      mediaQuery.removeEventListener('change', handleChange);
+    };
+  }, []);
+
+  useEffect(() => {
+    window.localStorage.setItem(THEME_STORAGE_KEY, themePreference);
+  }, [themePreference]);
+
+  const isDark = useMemo(
+    () => themePreference === 'dark' || (themePreference === 'system' && systemPrefersDark),
+    [themePreference, systemPrefersDark],
+  );
+
+  const toggleTheme = () => {
+    setThemePreference((prev) => {
+      if (prev === 'system') {
+        return systemPrefersDark ? 'light' : 'dark';
+      }
+      return prev === 'dark' ? 'light' : 'dark';
+    });
+  };
 
   return (
-    <ThemeToggleContext.Provider value={{ isDark, toggleTheme: () => setIsDark((p) => !p) }}>
+    <ThemeToggleContext.Provider value={{ isDark, toggleTheme }}>
       <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
         <CssBaseline />
-        {/* OW grid background — dark mode only */}
-        {isDark && (
-          <Box
-            aria-hidden
-            sx={{
-              position: 'fixed',
-              inset: 0,
-              backgroundImage:
-                'linear-gradient(rgba(249,158,26,0.032) 1px, transparent 1px), linear-gradient(90deg, rgba(249,158,26,0.032) 1px, transparent 1px)',
-              backgroundSize: '80px 80px',
-              pointerEvents: 'none',
-              zIndex: 0,
-            }}
-          />
-        )}
         {children}
       </ThemeProvider>
     </ThemeToggleContext.Provider>

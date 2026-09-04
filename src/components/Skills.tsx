@@ -11,34 +11,24 @@ export default function Skills() {
       id="skills"
       component="section"
       sx={{
-        py: { xs: 9, md: 12 },
+      py: { xs: 8, md: 10 },
         bgcolor: 'background.paper',
         borderTop: '1px solid',
         borderBottom: '1px solid',
         borderColor: 'divider',
-        position: 'relative',
-        '&::before': {
-          content: '""',
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          right: 0,
-          height: '2px',
-          background: 'linear-gradient(90deg, transparent, #F99E1A 30%, #00B4FF 70%, transparent)',
-        },
       }}
     >
       <Container maxWidth="md">
         <FadeIn>
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, mb: 1 }}>
-            <Box sx={{ width: 4, height: 20, bgcolor: 'secondary.main' }} />
+            <Box sx={{ width: 18, height: 1, bgcolor: 'text.primary' }} />
             <Typography
               sx={{
-                color: 'secondary.main',
-                fontWeight: 700,
-                letterSpacing: '0.2em',
+                color: 'text.secondary',
+                fontWeight: 600,
+                letterSpacing: '0.14em',
                 textTransform: 'uppercase',
-                fontSize: '0.7rem',
+                fontSize: '0.72rem',
                 fontFamily: 'var(--font-geist-mono), monospace',
               }}
             >
@@ -47,16 +37,16 @@ export default function Skills() {
           </Box>
           <Typography
             variant="h2"
-            sx={{ mt: 1, mb: 2, fontSize: { xs: '1.6rem', md: '2.2rem' }, textTransform: 'uppercase' }}
+            sx={{ mt: 1, mb: 2, fontSize: { xs: '1.6rem', md: '2.2rem' } }}
           >
             기술 스택
           </Typography>
-          <Typography variant="body1" color="text.secondary" sx={{ mb: 6 }}>
+          <Typography variant="body1" color="text.secondary" sx={{ mb: 5 }}>
             아래의 기술들을 사용할 수 있습니다.
           </Typography>
         </FadeIn>
 
-        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3.5 }}>
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
           {Object.entries(portfolioData.skills).map(([category, techs], i) => (
             <FadeIn key={category} delay={i * 80}>
               <Box
@@ -68,14 +58,14 @@ export default function Skills() {
                 }}
               >
                 <Box sx={{ minWidth: 120, display: 'flex', alignItems: 'center', gap: 1, pt: { sm: '4px' } }}>
-                  <Box sx={{ width: 2, height: 12, bgcolor: i % 2 === 0 ? 'primary.main' : 'secondary.main', flexShrink: 0 }} />
+                  <Box sx={{ width: 2, height: 12, bgcolor: 'divider', flexShrink: 0 }} />
                   <Typography
                     variant="caption"
                     sx={{
-                      fontWeight: 700,
+                      fontWeight: 600,
                       letterSpacing: '0.1em',
                       textTransform: 'uppercase',
-                      color: i % 2 === 0 ? 'primary.main' : 'secondary.main',
+                      color: 'text.secondary',
                       fontSize: '0.65rem',
                     }}
                   >
@@ -92,12 +82,10 @@ export default function Skills() {
                       sx={{
                         transition: 'all 0.2s',
                         '&:hover': {
-                          borderColor: i % 2 === 0 ? 'primary.main' : 'secondary.main',
-                          color: i % 2 === 0 ? 'primary.main' : 'secondary.main',
-                          bgcolor: i % 2 === 0 ? 'rgba(249,158,26,0.06)' : 'rgba(0,180,255,0.06)',
-                          boxShadow: i % 2 === 0
-                            ? '0 0 8px rgba(249,158,26,0.25)'
-                            : '0 0 8px rgba(0,180,255,0.25)',
+                          borderColor: 'text.primary',
+                          color: 'text.primary',
+                          bgcolor: 'action.hover',
+                          boxShadow: 'none',
                         },
                       }}
                     />
@@ -111,4 +99,3 @@ export default function Skills() {
     </Box>
   );
 }
-

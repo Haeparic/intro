@@ -15,34 +15,24 @@ export default function Projects() {
       id="projects"
       component="section"
       sx={{
-        py: { xs: 9, md: 12 },
+      py: { xs: 8, md: 10 },
         bgcolor: 'background.paper',
         borderTop: '1px solid',
         borderBottom: '1px solid',
         borderColor: 'divider',
-        position: 'relative',
-        '&::before': {
-          content: '""',
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          right: 0,
-          height: '2px',
-          background: 'linear-gradient(90deg, #00B4FF 0%, #F99E1A 50%, transparent 100%)',
-        },
       }}
     >
       <Container maxWidth="md">
         <FadeIn>
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, mb: 1 }}>
-            <Box sx={{ width: 4, height: 20, bgcolor: 'secondary.main' }} />
+            <Box sx={{ width: 18, height: 1, bgcolor: 'text.primary' }} />
             <Typography
               sx={{
-                color: 'secondary.main',
-                fontWeight: 700,
-                letterSpacing: '0.2em',
+                color: 'text.secondary',
+                fontWeight: 600,
+                letterSpacing: '0.14em',
                 textTransform: 'uppercase',
-                fontSize: '0.7rem',
+                fontSize: '0.72rem',
                 fontFamily: 'var(--font-geist-mono), monospace',
               }}
             >
@@ -51,16 +41,16 @@ export default function Projects() {
           </Box>
           <Typography
             variant="h2"
-            sx={{ mt: 1, mb: 2, fontSize: { xs: '1.6rem', md: '2.2rem' }, textTransform: 'uppercase' }}
+            sx={{ mt: 1, mb: 2, fontSize: { xs: '1.6rem', md: '2.2rem' } }}
           >
             프로젝트
           </Typography>
-          <Typography variant="body1" color="text.secondary" sx={{ mb: 6 }}>
+          <Typography variant="body1" color="text.secondary" sx={{ mb: 5 }}>
             주요 프로젝트의 세부 사항을 확인해 보세요.
           </Typography>
         </FadeIn>
 
-        <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)' }, gap: 2 }}>
+        <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)' }, gap: 1.5 }}>
           {portfolioData.projects.map((project, i) => (
             <FadeIn key={i} delay={i * 100}>
               <Card
@@ -68,39 +58,14 @@ export default function Projects() {
                   height: '100%',
                   display: 'flex',
                   flexDirection: 'column',
-                  position: 'relative',
-                  overflow: 'hidden',
-                  '&::before': {
-                    content: '""',
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    height: '2px',
-                    background: project.status === '서비스 중'
-                      ? 'linear-gradient(90deg, #F99E1A, transparent)'
-                      : 'linear-gradient(90deg, #00B4FF, transparent)',
-                  },
-                  '&::after': {
-                    content: '""',
-                    position: 'absolute',
-                    top: 0,
-                    right: 0,
-                    width: 0,
-                    height: 0,
-                    borderStyle: 'solid',
-                    borderWidth: '0 20px 20px 0',
-                    borderColor: project.status === '서비스 중'
-                      ? 'transparent rgba(249,158,26,0.3) transparent transparent'
-                      : 'transparent rgba(0,180,255,0.3) transparent transparent',
-                  },
+                  borderColor: 'divider',
                 }}
               >
                 <CardContent sx={{ p: 3, flex: 1 }}>
                   <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 1 }}>
                     <Typography
                       variant="h6"
-                      sx={{ fontWeight: 800, fontSize: '0.95rem', letterSpacing: '0.02em', pr: 1 }}
+                      sx={{ fontWeight: 700, fontSize: '0.95rem', letterSpacing: '0.01em', pr: 1 }}
                     >
                       {project.title}
                     </Typography>
@@ -112,24 +77,19 @@ export default function Projects() {
                         flexShrink: 0,
                         fontSize: '0.65rem',
                         height: 20,
-                        borderRadius: 0,
-                        fontWeight: 700,
-                        letterSpacing: '0.06em',
-                        bgcolor: project.status === '서비스 중'
-                          ? 'rgba(249,158,26,0.12)'
-                          : 'rgba(0,180,255,0.08)',
-                        color: project.status === '서비스 중' ? 'primary.main' : 'secondary.main',
+                        borderRadius: 1,
+                        fontWeight: 600,
+                        bgcolor: project.status === '서비스 중' ? 'text.primary' : 'action.hover',
+                        color: project.status === '서비스 중' ? 'background.default' : 'text.secondary',
                         border: '1px solid',
-                        borderColor: project.status === '서비스 중'
-                          ? 'rgba(249,158,26,0.4)'
-                          : 'rgba(0,180,255,0.35)',
+                        borderColor: project.status === '서비스 중' ? 'text.primary' : 'divider',
                       }}
                     />
                   </Box>
                   <Typography
                     variant="caption"
                     sx={{
-                      color: 'text.disabled',
+                      color: 'text.secondary',
                       fontFamily: 'var(--font-geist-mono), monospace',
                       display: 'block',
                       mb: 2,
@@ -156,7 +116,7 @@ export default function Projects() {
                         href={project.github}
                         target="_blank"
                         rel="noopener noreferrer"
-                        sx={{ color: 'text.secondary', '&:hover': { color: 'primary.main' } }}
+                        sx={{ color: 'text.secondary', '&:hover': { color: 'text.primary' } }}
                       >
                         GitHub
                       </Button>
@@ -183,4 +143,3 @@ export default function Projects() {
     </Box>
   );
 }
-
