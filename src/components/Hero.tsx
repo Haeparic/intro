@@ -6,7 +6,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
-import { motion, useInView } from 'framer-motion';
+import { motion, useInView, useReducedMotion } from 'framer-motion';
 import { useTheme } from '@mui/material/styles';
 import { portfolioData } from '@/data/portfolio';
 
@@ -24,10 +24,15 @@ export default function Hero() {
   const [typedText, setTypedText] = useState('');
   const [showCursor, setShowCursor] = useState(false);
   const muiTheme = useTheme();
+  const reduceMotion = useReducedMotion() ?? false;
   const sectionRef = useRef<HTMLElement>(null);
   const inView = useInView(sectionRef, { once: false, amount: 0.3 });
 
   useEffect(() => {
+    if (reduceMotion) {
+      return;
+    }
+
     if (!inView) return;
 
     const full = personal.tagline;
@@ -63,12 +68,19 @@ export default function Hero() {
       cancelled = true;
       clearTimeout(timerId);
     };
-  }, [inView, personal.tagline]);
+  }, [inView, personal.tagline, reduceMotion]);
+
+  const displayedTagline = reduceMotion ? personal.tagline : typedText;
 
   return (
     <Box id="hero" component="section" ref={sectionRef} sx={{ minHeight: '92dvh', display: 'flex', alignItems: 'center', pt: 9, pb: 7 }}>
       <Container maxWidth="md">
-        <motion.div variants={containerVariants} initial="hidden" whileInView="show" viewport={{ once: false, amount: 0.2 }}>
+        <motion.div
+          variants={containerVariants}
+          initial={reduceMotion ? false : 'hidden'}
+          whileInView={reduceMotion ? undefined : 'show'}
+          viewport={{ once: true, amount: 0.2 }}
+        >
           <motion.div variants={itemVariants}>
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, mb: 3 }}>
               <Box sx={{ width: 28, height: 1, bgcolor: 'text.primary', flexShrink: 0 }} />
@@ -93,8 +105,8 @@ export default function Hero() {
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, mb: 2.5 }}>
               <Box sx={{ width: 2, height: 18, bgcolor: 'divider', flexShrink: 0 }} />
               <Typography sx={{ color: 'text.secondary', fontSize: { xs: '0.95rem', sm: '1.05rem' }, fontFamily: 'var(--font-geist-mono), monospace', minHeight: '1.6em' }}>
-                {typedText}
-                {showCursor && (
+                {displayedTagline}
+                {showCursor && !reduceMotion && (
                   <motion.span
                     animate={{ opacity: [1, 1, 0, 0, 1] }}
                     transition={{ duration: 1.1, repeat: Infinity, times: [0, 0.45, 0.55, 0.9, 1], ease: 'easeInOut' }}
@@ -119,11 +131,6 @@ export default function Hero() {
               <Button variant="outlined" color="primary" size="large" component="a" href="#contact">
                 연락하기
               </Button>
-              {personal.github && (
-                <Button component="a" href={personal.github} target="_blank" rel="noopener noreferrer" size="large" sx={{ color: 'text.secondary', border: '1px solid', borderColor: 'divider', '&:hover': { color: 'text.primary' } }}>
-                  GitHub
-                </Button>
-              )}
             </Stack>
           </motion.div>
 
@@ -137,7 +144,6 @@ export default function Hero() {
           <motion.div variants={itemVariants}>
             <Stack direction="row" spacing={2} alignItems="center" flexWrap="wrap" useFlexGap sx={{ mt: 3.5 }}>
               {[
-                { label: 'GitHub', href: personal.github },
                 ...(personal.blog ? [{ label: 'Blog', href: personal.blog }] : []),
                 { label: personal.email, href: `mailto:${personal.email}` },
               ].map((link, i, arr) => (

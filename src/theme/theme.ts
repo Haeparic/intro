@@ -1,7 +1,7 @@
 import { createTheme } from '@mui/material/styles';
 
 const typographyBase = {
-  fontFamily: 'var(--font-geist-sans), "Noto Sans KR", sans-serif',
+  fontFamily: '"Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, sans-serif',
   h1: { fontWeight: 800, letterSpacing: '0.005em', lineHeight: 1.04 },
   h2: { fontWeight: 700, letterSpacing: '0.01em', lineHeight: 1.2 },
   h3: { fontWeight: 700, letterSpacing: '0.01em', lineHeight: 1.3 },
@@ -28,6 +28,15 @@ export const lightTheme = createTheme({
   shape: { borderRadius: 4 },
   components: {
     MuiCssBaseline: { styleOverrides: { html: { scrollBehavior: 'smooth' }, body: { backgroundColor: '#FFFFFF' } } },
+    MuiContainer: {
+      styleOverrides: {
+        root: {
+          paddingLeft: 20,
+          paddingRight: 20,
+          '@media (min-width:600px)': { paddingLeft: 24, paddingRight: 24 },
+        },
+      },
+    },
     MuiButton: {
       styleOverrides: {
         root: {
@@ -94,6 +103,15 @@ export const darkTheme = createTheme({
   shape: { borderRadius: 4 },
   components: {
     MuiCssBaseline: { styleOverrides: { html: { scrollBehavior: 'smooth' }, body: { backgroundColor: '#0F0F10' } } },
+    MuiContainer: {
+      styleOverrides: {
+        root: {
+          paddingLeft: 20,
+          paddingRight: 20,
+          '@media (min-width:600px)': { paddingLeft: 24, paddingRight: 24 },
+        },
+      },
+    },
     MuiButton: {
       styleOverrides: {
         root: {

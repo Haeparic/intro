@@ -6,10 +6,8 @@ export const portfolioData = {
     tagline: "사용자가 편하게 사용할 수 있는 웹 경험을 만듭니다.",
     bio: "사용자가 편하게 사용할 수 있는 웹 경험을 만드는 프론트엔드 개발자입니다. 최신 기술을 무조건 따르기보다는 팀이 실제로 잘 다룰 수 있는지, 현실적으로 관리할 수 있는지, 앞으로 유지보수하기 좋은지를 먼저 고려합니다. 개인의 전문성만큼 팀과의 협업을 소중하게 여기며, 코드 리뷰와 지식 공유를 통해 함께 성장하려 노력합니다.",
     email: "v567v202@gmail.com",
-    github: "https://github.com/v567v",
     blog: "",
     linkedin: "",
-    resume: "#",
   },
 
   strengths: [
@@ -83,14 +81,23 @@ export const portfolioData = {
 
   projects: [
     {
+      title: "PokoBook - 포코피아 비공식 팬 가이드",
+      description:
+        "포코피아 관련 정보를 한곳에서 탐색할 수 있도록 정리한 웹페이지. 포코피아 정보 아카이빙, 탐색 중심 UI, 참고 자료 기반 데이터 정리를 중심으로 구성한 비공식 팬 프로젝트입니다.",
+      period: "2026.09 – 진행 중",
+      team: "개인 프로젝트",
+      stacks: ["Next.js", "TypeScript", "Prisma", "PostgreSQL", "Tailwind CSS"],
+      demo: "https://pokopia-db.vercel.app/",
+      status: "서비스 중" as const,
+    },
+    {
       title: "Zephy - AI Agent 채팅 플랫폼",
       description:
         "AI 챗봇과 대화할 수 있는 에이전트 플랫폼. 스트리밍 채팅, 실시간 파일 업로드 진행률, 음성 대화, RAG 기반 문서 참조 하이라이팅, 인라인 문서 편집 등 다양한 에이전트 기능을 포함합니다.",
       period: "2025.09 – 2026.03",
       team: "팀 프로젝트",
       stacks: ["React", "TypeScript", "Socket.IO", "MUI"],
-      github: null,
-      demo: null,
+      demo: "https://zephy.univa.ai/",
       status: "서비스 중" as const,
     },
     {
@@ -100,8 +107,7 @@ export const portfolioData = {
       period: "2024.12 – 2025.09",
       team: "팀 프로젝트",
       stacks: ["React", "TypeScript", "AWS Amplify", "Redux Toolkit", "React Query", "MUI"],
-      github: null,
-      demo: null,
+      demo: "https://www.moonjeg.com/",
       status: "서비스 중" as const,
     },
     {
@@ -111,7 +117,6 @@ export const portfolioData = {
       period: "2024.06 – 2024.12",
       team: "팀 프로젝트",
       stacks: ["Next.js", "TypeScript", "Redux Toolkit", "RTK Query", "MUI"],
-      github: null,
       demo: null,
       status: "서비스 중단" as const,
     },
@@ -122,7 +127,6 @@ export const portfolioData = {
       period: "2023.05 – 2024.06",
       team: "팀 프로젝트",
       stacks: ["React", "TypeScript", "AWS Amplify", "Redux Toolkit"],
-      github: null,
       demo: null,
       status: "서비스 중단" as const,
     },

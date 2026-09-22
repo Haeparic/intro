@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Box from '@mui/material/Box';
@@ -14,6 +14,7 @@ import ListItemText from '@mui/material/ListItemText';
 import Typography from '@mui/material/Typography';
 import Tooltip from '@mui/material/Tooltip';
 import useScrollTrigger from '@mui/material/useScrollTrigger';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
@@ -36,6 +37,14 @@ export default function Navbar() {
   const { isDark, toggleTheme } = useThemeToggle();
   const muiTheme = useTheme();
   const dark = muiTheme.palette.mode === 'dark';
+  const isMobile = useMediaQuery(muiTheme.breakpoints.down('sm'));
+
+  useEffect(() => {
+    if (isMobile || !drawerOpen) return;
+
+    const closeDrawer = window.setTimeout(() => setDrawerOpen(false), 0);
+    return () => window.clearTimeout(closeDrawer);
+  }, [drawerOpen, isMobile]);
 
   return (
     <>
@@ -56,7 +65,7 @@ export default function Navbar() {
             maxWidth: 960,
             width: '100%',
             mx: 'auto',
-            px: { xs: 2, sm: 3 },
+            px: { xs: 2.5, sm: 3 },
             minHeight: { xs: 54, sm: 60 },
           }}
         >
@@ -94,16 +103,6 @@ export default function Navbar() {
                 {link.label}
               </Button>
             ))}
-            <Button
-              component="a"
-              href={portfolioData.personal.resume}
-              variant="outlined"
-              color="primary"
-              size="small"
-              sx={{ ml: 1 }}
-            >
-              이력서
-            </Button>
             <Tooltip title={isDark ? '라이트 모드' : '다크 모드'}>
               <IconButton
                 onClick={toggleTheme}
@@ -136,9 +135,17 @@ export default function Navbar() {
 
       <Drawer
         anchor="right"
-        open={drawerOpen}
+        open={isMobile && drawerOpen}
         onClose={() => setDrawerOpen(false)}
-        PaperProps={{ sx: { width: 260, backgroundImage: 'none', borderLeft: '1px solid', borderColor: 'divider' } }}
+        PaperProps={{
+          sx: {
+            width: { xs: 'min(280px, 86vw)', sm: 260 },
+            overscrollBehavior: 'contain',
+            backgroundImage: 'none',
+            borderLeft: '1px solid',
+            borderColor: 'divider',
+          },
+        }}
       >
         <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', p: 2 }}>
           <Typography sx={{ fontWeight: 700, color: 'text.primary', fontSize: '0.9rem' }}>MENU</Typography>
@@ -164,18 +171,6 @@ export default function Navbar() {
               </ListItemButton>
             </ListItem>
           ))}
-          <ListItem sx={{ pt: 2, px: 2 }}>
-            <Button
-              fullWidth
-              component="a"
-              href={portfolioData.personal.resume}
-              variant="outlined"
-              color="primary"
-              onClick={() => setDrawerOpen(false)}
-            >
-              이력서
-            </Button>
-          </ListItem>
         </List>
       </Drawer>
     </>

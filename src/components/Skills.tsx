@@ -80,7 +80,7 @@ export default function Skills() {
                       variant="outlined"
                       size="small"
                       sx={{
-                        transition: 'all 0.2s',
+                        transition: 'border-color 0.2s ease, color 0.2s ease, background-color 0.2s ease',
                         '&:hover': {
                           borderColor: 'text.primary',
                           color: 'text.primary',

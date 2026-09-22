@@ -2,7 +2,6 @@ import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import Stack from '@mui/material/Stack';
 import { portfolioData } from '@/data/portfolio';
 
 export default function Contact() {
@@ -60,51 +59,6 @@ export default function Contact() {
           >
             메일 보내기 ↗
           </Button>
-
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, mb: 4, justifyContent: 'center' }}>
-            <Box sx={{ flex: 1, height: 1, bgcolor: 'divider' }} />
-            <Box sx={{ width: 5, height: 1, bgcolor: 'text.primary' }} />
-            <Box sx={{ flex: 1, height: 1, bgcolor: 'divider' }} />
-          </Box>
-
-          <Stack direction="row" spacing={2} justifyContent="center" flexWrap="wrap" useFlexGap>
-            {personal.github && (
-              <Button
-                component="a"
-                href={personal.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                sx={{
-                  color: 'text.secondary',
-                  '&:hover': { color: 'text.primary', bgcolor: 'action.hover' },
-                }}
-              >
-                GitHub
-              </Button>
-            )}
-            {personal.linkedin && (
-              <Button
-                component="a"
-                href={personal.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                sx={{ color: 'text.secondary', '&:hover': { color: 'text.primary', bgcolor: 'action.hover' } }}
-              >
-                LinkedIn
-              </Button>
-            )}
-            {personal.blog && (
-              <Button
-                component="a"
-                href={personal.blog}
-                target="_blank"
-                rel="noopener noreferrer"
-                sx={{ color: 'text.secondary', '&:hover': { color: 'text.primary', bgcolor: 'action.hover' } }}
-              >
-                Blog
-              </Button>
-            )}
-          </Stack>
         </Box>
       </Container>
     </Box>

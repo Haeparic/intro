@@ -3,9 +3,9 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import CardActions from '@mui/material/CardActions';
 import Chip from '@mui/material/Chip';
-import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
+import OpenInNewRoundedIcon from '@mui/icons-material/OpenInNewRounded';
 import { portfolioData } from '@/data/portfolio';
 import FadeIn from '@/components/FadeIn';
 
@@ -51,41 +51,52 @@ export default function Projects() {
         </FadeIn>
 
         <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)' }, gap: 1.5 }}>
-          {portfolioData.projects.map((project, i) => (
-            <FadeIn key={i} delay={i * 100}>
-              <Card
-                sx={{
-                  height: '100%',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  borderColor: 'divider',
-                }}
-              >
-                <CardContent sx={{ p: 3, flex: 1 }}>
-                  <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 1 }}>
-                    <Typography
-                      variant="h6"
-                      sx={{ fontWeight: 700, fontSize: '0.95rem', letterSpacing: '0.01em', pr: 1 }}
-                    >
-                      {project.title}
-                    </Typography>
-                    <Chip
-                      label={project.status}
-                      size="small"
-                      sx={{
-                        ml: 1,
-                        flexShrink: 0,
-                        fontSize: '0.65rem',
-                        height: 20,
-                        borderRadius: 1,
-                        fontWeight: 600,
-                        bgcolor: project.status === '서비스 중' ? 'text.primary' : 'action.hover',
-                        color: project.status === '서비스 중' ? 'background.default' : 'text.secondary',
-                        border: '1px solid',
-                        borderColor: project.status === '서비스 중' ? 'text.primary' : 'divider',
-                      }}
-                    />
-                  </Box>
+          {portfolioData.projects.map((project, i) => {
+            const pageLink = project.demo;
+
+            return (
+              <FadeIn key={i} delay={i * 100}>
+                <Card
+                  sx={{
+                    height: '100%',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    borderColor: 'divider',
+                  }}
+                >
+                  <CardContent sx={{ p: 3, flex: 1 }}>
+                    <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 1, mb: 1 }}>
+                      <Typography
+                        variant="h6"
+                        sx={{ minWidth: 0, overflowWrap: 'anywhere', fontWeight: 700, fontSize: '0.95rem', letterSpacing: '0.01em' }}
+                      >
+                        {project.title}
+                      </Typography>
+                      {pageLink && (
+                        <IconButton
+                             component="a"
+                             href={pageLink}
+                             target="_blank"
+                             rel="noopener noreferrer"
+                            size="small"
+                            aria-label={`${project.title} 페이지 열기`}
+                            sx={{
+                              flexShrink: 0,
+                              border: '1px solid',
+                              borderColor: 'divider',
+                              borderRadius: 1,
+                              color: 'text.secondary',
+                              '&:hover': {
+                                color: 'text.primary',
+                                borderColor: 'text.primary',
+                                bgcolor: 'action.hover',
+                              },
+                            }}
+                         >
+                           <OpenInNewRoundedIcon fontSize="inherit" />
+                         </IconButton>
+                      )}
+                    </Box>
                   <Typography
                     variant="caption"
                     sx={{
@@ -106,38 +117,11 @@ export default function Projects() {
                       <Chip key={stack} label={stack} size="small" variant="outlined" sx={{ fontSize: '0.72rem' }} />
                     ))}
                   </Box>
-                </CardContent>
-                {(project.github || project.demo) && (
-                  <CardActions sx={{ px: 2.5, pb: 2.5, pt: 0, gap: 0.5 }}>
-                    {project.github && (
-                      <Button
-                        size="small"
-                        component="a"
-                        href={project.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        sx={{ color: 'text.secondary', '&:hover': { color: 'text.primary' } }}
-                      >
-                        GitHub
-                      </Button>
-                    )}
-                    {project.demo && (
-                      <Button
-                        size="small"
-                        component="a"
-                        href={project.demo}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        color="primary"
-                      >
-                        데모 보기 ↗
-                      </Button>
-                    )}
-                  </CardActions>
-                )}
-              </Card>
-            </FadeIn>
-          ))}
+                  </CardContent>
+                </Card>
+              </FadeIn>
+            );
+          })}
         </Box>
       </Container>
     </Box>

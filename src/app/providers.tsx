@@ -23,19 +23,9 @@ export function useThemeToggle() {
 }
 
 export default function Providers({ children }: { children: React.ReactNode }) {
-  const [themePreference, setThemePreference] = useState<ThemePreference>(() => {
-    if (typeof window === 'undefined') {
-      return 'system';
-    }
-    const saved = window.localStorage.getItem(THEME_STORAGE_KEY);
-    if (saved === 'light' || saved === 'dark' || saved === 'system') {
-      return saved;
-    }
-    return 'system';
-  });
-  const [systemPrefersDark, setSystemPrefersDark] = useState(() => (
-    typeof window !== 'undefined' ? window.matchMedia('(prefers-color-scheme: dark)').matches : false
-  ));
+  const [themePreference, setThemePreference] = useState<ThemePreference>('system');
+  const [systemPrefersDark, setSystemPrefersDark] = useState(false);
+  const [themeReady, setThemeReady] = useState(false);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
@@ -45,14 +35,25 @@ export default function Providers({ children }: { children: React.ReactNode }) {
     };
 
     mediaQuery.addEventListener('change', handleChange);
+    const initializationFrame = window.requestAnimationFrame(() => {
+      const saved = window.localStorage.getItem(THEME_STORAGE_KEY);
+      if (saved === 'light' || saved === 'dark' || saved === 'system') {
+        setThemePreference(saved);
+      }
+      setSystemPrefersDark(mediaQuery.matches);
+      setThemeReady(true);
+    });
+
     return () => {
+      window.cancelAnimationFrame(initializationFrame);
       mediaQuery.removeEventListener('change', handleChange);
     };
   }, []);
 
   useEffect(() => {
+    if (!themeReady) return;
     window.localStorage.setItem(THEME_STORAGE_KEY, themePreference);
-  }, [themePreference]);
+  }, [themePreference, themeReady]);
 
   const isDark = useMemo(
     () => themePreference === 'dark' || (themePreference === 'system' && systemPrefersDark),
@@ -71,7 +72,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
   return (
     <ThemeToggleContext.Provider value={{ isDark, toggleTheme }}>
       <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
-        <CssBaseline />
+        <CssBaseline enableColorScheme />
         {children}
       </ThemeProvider>
     </ThemeToggleContext.Provider>
