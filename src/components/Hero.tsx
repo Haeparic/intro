@@ -97,6 +97,9 @@ export default function Hero() {
               </Box>
               <Box component="span" sx={{ color: 'text.primary' }}>
                 {personal.name}
+                <Box component="span" sx={{ color: 'text.secondary', fontSize: '0.34em', fontWeight: 500, ml: 0.35 }}>
+                  입니다.
+                </Box>
               </Box>
             </Typography>
           </motion.div>
@@ -124,7 +127,7 @@ export default function Hero() {
           </motion.div>
 
           <motion.div variants={itemVariants}>
-            <Stack direction="row" spacing={1.25} flexWrap="wrap" useFlexGap sx={{ mb: 5 }}>
+            <Stack direction="row" spacing={1.25} flexWrap="wrap" useFlexGap sx={{ mb: 3.5 }}>
               <Button variant="contained" color="primary" size="large" component="a" href="#projects">
                 프로젝트 보기
               </Button>
@@ -135,14 +138,7 @@ export default function Hero() {
           </motion.div>
 
           <motion.div variants={itemVariants}>
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-              <Box sx={{ width: 40, height: 1, bgcolor: 'divider' }} />
-              <Box sx={{ width: 16, height: 1, bgcolor: 'text.primary' }} />
-            </Box>
-          </motion.div>
-
-          <motion.div variants={itemVariants}>
-            <Stack direction="row" spacing={2} alignItems="center" flexWrap="wrap" useFlexGap sx={{ mt: 3.5 }}>
+            <Stack direction="row" spacing={2} alignItems="center" flexWrap="wrap" useFlexGap>
               {[
                 ...(personal.blog ? [{ label: 'Blog', href: personal.blog }] : []),
                 { label: personal.email, href: `mailto:${personal.email}` },
